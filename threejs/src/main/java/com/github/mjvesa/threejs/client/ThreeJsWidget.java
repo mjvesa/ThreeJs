@@ -48,7 +48,7 @@ public class ThreeJsWidget extends Widget {
         camera = PerspectiveCamera.getInstance(root, root.getOffsetWidth()
                 / root.getOffsetHeight());
         camera.setPosition(0, 0, 2);
-        
+
         renderer = WebGLRenderer.getInstance();
         renderer.setSize(root.getOffsetWidth(), root.getOffsetHeight());
         root.appendChild(renderer.getDOMElement());
@@ -83,19 +83,41 @@ public class ThreeJsWidget extends Widget {
     public void loadObjWithTexture(String url, final String texUrl) {
 
         final MeshBasicMaterial material = MeshBasicMaterial.getInstance();
-        loadObjWithMaterial(url, texUrl, material);
+        loadObjWithMaterialAndTexture(url, texUrl, material);
     }
 
-    public void loadObjWithTextureAndPhong(String url, final String texUrl, int ambient, int color,
-            int specular, int shininess) {
+    public void loadObjWithTextureAndPhong(String url, final String texUrl,
+            int ambient, int color, int specular, int shininess) {
 
-        final MeshPhongMaterial material = MeshPhongMaterial.getInstance(ambient, color, specular, shininess);
-        loadObjWithMaterial(url, texUrl, material);
-        
+        final MeshPhongMaterial material = MeshPhongMaterial.getInstance(
+                ambient, color, specular, shininess);
+        loadObjWithMaterialAndTexture(url, texUrl, material);
+
     }
-    
-    private void loadObjWithMaterial(String url, final String texUrl, final Material material) {
 
+    public void loadObjWithTextureAndPhong(String url, int ambient,
+            int color, int specular, int shininess) {
+        final MeshPhongMaterial material = MeshPhongMaterial.getInstance(
+                ambient, color, specular, shininess);
+        loadObjWithMaterial(url, material);
+    }
+
+    private void loadObjWithMaterial(String url, final Material material) {
+
+        Obj.loadObj(url, new OnObjLoad() {
+
+            @Override
+            public void onLoad(final Obj obj) {
+
+                obj.setMaterial(material);
+                scene.addObject(obj);
+            };
+
+        });
+    }
+
+    private void loadObjWithMaterialAndTexture(String url,
+            final String texUrl, final Material material) {
 
         Obj.loadObj(url, new OnObjLoad() {
 
@@ -116,19 +138,20 @@ public class ThreeJsWidget extends Widget {
 
         });
     }
-    
+
     public void addDirectionalLight(String id, int hexColor, double intensity) {
         DirectionalLight light = DirectionalLight.getInstance(0xffffff, 0.5);
         scene.addLight(light);
         lights.put(id, light);
-        
+
     }
-    
-    public void setDirectionalLightPosition(String id, double x, double y, double z) {
-            DirectionalLight light = (DirectionalLight) lights.get(id);
-            if (light != null) {
-                light.setPosition(x, y, z);
-            }
+
+    public void setDirectionalLightPosition(String id, double x, double y,
+            double z) {
+        DirectionalLight light = (DirectionalLight) lights.get(id);
+        if (light != null) {
+            light.setPosition(x, y, z);
+        }
     }
 
 }

@@ -55,6 +55,15 @@ public class ThreeJsConnector extends AbstractComponentConnector {
                 getWidget().loadObjWithTextureAndPhong(url, texUrl, ambient, color, specular, shininess);
                 
             }
+            
+            
+            @Override
+            public void loadObjWithPhong(int ambient, int color,
+                    int specular, int shininess) {
+                String url = getResourceUrl("objUrl");
+                getWidget().loadObjWithTextureAndPhong(url, ambient, color, specular, shininess);
+            }
+
 
             @Override
             public void addDirectionalLight(String id, int hexColor,
@@ -69,6 +78,7 @@ public class ThreeJsConnector extends AbstractComponentConnector {
                 getWidget().setDirectionalLightPosition(id, x, y, z);
                 
             }
+
         });
     }
 

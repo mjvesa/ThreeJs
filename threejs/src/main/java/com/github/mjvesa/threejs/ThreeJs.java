@@ -51,6 +51,12 @@ public class ThreeJs extends com.vaadin.ui.AbstractComponent {
         getRpc().loadObjWithTextureAndPhong(ambient, color, specular, shininess);
     }
     
+    public void loadObj(Resource objRes, int ambient, int color, int specular, int shininess) {
+        setResource(OBJ_URL_KEY, objRes);
+        getRpc().loadObjWithPhong(ambient, color, specular, shininess);
+    }
+
+    
     public void startAnimation() {
         getRpc().startAnimation();
     }
