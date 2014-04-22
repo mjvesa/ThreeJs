@@ -88,7 +88,6 @@ public class ThreeJsConnector extends AbstractComponentConnector {
             @Override
             public void setMaterialToObj(String materialId, String objId) {
                 getWidget().setMaterialToObj(materialId, objId);
-                
             }
 
             @Override

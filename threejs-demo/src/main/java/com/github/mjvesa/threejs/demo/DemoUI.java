@@ -76,13 +76,13 @@ public class DemoUI extends UI {
                 case VAADIN:
                     
                     three.loadObj("obj", new ThemeResource("vaadin.obj"));                    
-                    three.createPhongMaterial("material",0x303030,
-                            0xdddddd, 0xffffff, 30);
 
                     three.createDirectionalLight("light", 0xffffff, 0.5);
                     three.setDirectionalLightPosition("light", 0, 0, 2);
                     three.addLight("light");
                                                         
+                    three.createPhongMaterial("material",0x303030,
+                            0xdddddd, 0xffffff, 30);
                     three.loadTextureToMaterial(new ThemeResource("steel.jpg"), "material");
                     three.setMaterialToObj("material", "obj");
                     three.addObj("obj");

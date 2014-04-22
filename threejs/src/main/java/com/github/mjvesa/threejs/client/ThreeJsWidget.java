@@ -171,7 +171,6 @@ public class ThreeJsWidget extends Widget {
     }
 
     public void setMaterialToObj(String materialId, String objId) {
-
         Mesh obj = objects.get(objId);
         if (obj == null || obj == OBJ_ADD_REQUESTED) {
             addPendingMaterialToObj(materialId, objId);
@@ -185,6 +184,7 @@ public class ThreeJsWidget extends Widget {
         List<Material> lst = objMaterials.get(objId);
         if (lst == null) {
             lst = new ArrayList<Material>();
+            objMaterials.put(objId, lst);
         }
 
         lst.add(materials.get(materialId));
