@@ -59,6 +59,7 @@ public class DemoUI extends UI {
         cb.addItem(OBJECT.VAADIN);
         cb.addItem(OBJECT.MOLECULE);
         cb.addItem(OBJECT.CASTLE);
+        cb.setNullSelectionAllowed(false);        
         cb.setImmediate(true);
 
         cb.addValueChangeListener(new Property.ValueChangeListener() {
@@ -69,36 +70,49 @@ public class DemoUI extends UI {
                 OBJECT obj = (OBJECT) event.getProperty().getValue();
 
                 final ThreeJs three = new ThreeJs();
+                three.setSizeFull();
 
                 switch (obj) {
                 case VAADIN:
-                    // three.loadObj(new ThemeResource("3whd.obj"), new
-                    // ThemeResource(
-                    // "steel.jpg"), 0x303030, 0xdddddd, 0xffffff, 30);
-                    three.loadObj(new ThemeResource("vaadin.obj"), 0x303030,
+                    
+                    three.loadObj("obj", new ThemeResource("vaadin.obj"));                    
+                    three.createPhongMaterial("material",0x303030,
                             0xdddddd, 0xffffff, 30);
-                    three.setSizeFull();
 
-                    three.addDirectionalLight("light", 0xffffff, 0.5);
+                    three.createDirectionalLight("light", 0xffffff, 0.5);
                     three.setDirectionalLightPosition("light", 0, 0, 2);
+                    three.addLight("light");
+                                                        
+                    three.loadTextureToMaterial(new ThemeResource("steel.jpg"), "material");
+                    three.setMaterialToObj("material", "obj");
+                    three.addObj("obj");
+
 
                     break;
                 case MOLECULE:
-                    three.loadObj(new ThemeResource("3whb.obj"), 0x303030,
-                            0xdddddd, 0xffffff, 30);
-                    three.setSizeFull();
+                    three.loadObj("obj", new ThemeResource("3whb.obj"));
 
-                    three.addDirectionalLight("light", 0xffffff, 0.5);
+                    three.createPhongMaterial("material",0x303030,
+                            0xdddddd, 0xffffff, 30);
+                    three.setMaterialToObj("material", "obj");
+                    three.addObj("obj");
+                    
+                    three.createDirectionalLight("light", 0xffffff, 0.5);
                     three.setDirectionalLightPosition("light", 0, 0, 2);
+                    three.addLight("light");
 
                     break;
                 case CASTLE:
-                    three.loadObj(new ThemeResource("castle.obj"), 0x303030,
-                            0xdddddd, 0xffffff, 30);
-                    three.setSizeFull();
+                    three.loadObj("obj", new ThemeResource("castle.obj"));
 
-                    three.addDirectionalLight("light", 0xffffff, 0.5);
+                    three.createPhongMaterial("material",0x303030,
+                            0xdddddd, 0xffffff, 30);
+                    three.setMaterialToObj("material", "obj");
+                    three.addObj("obj");
+
+                    three.createDirectionalLight("light", 0xffffff, 0.5);
                     three.setDirectionalLightPosition("light", 0, 0, 2);
+                    three.addLight("light");
 
                     break;
 

@@ -5,10 +5,9 @@ import com.github.mjvesa.threejs.client.ThreeJsServerRpc;
 import com.github.mjvesa.threejs.client.ThreeJsState;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.server.Resource;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.shared.MouseEventDetails;
 
-// This is the server-side UI component that provides public API 
-// for Three
 @JavaScript({ "three.min.js", "OBJLoader.js", "TrackballControls.js" })
 public class ThreeJs extends com.vaadin.ui.AbstractComponent {
 
@@ -17,45 +16,42 @@ public class ThreeJs extends com.vaadin.ui.AbstractComponent {
 
     private int clickCount = 0;
 
-    // To process events from the client, we implement ServerRpc
     private ThreeJsServerRpc rpc = new ThreeJsServerRpc() {
 
     };
 
     public ThreeJs() {
 
-        // To receive events from the client, we register ServerRpc
         registerRpc(rpc);
     }
 
-    // We must override getState() to cast the state to ThreeState
     @Override
     public ThreeJsState getState() {
         return (ThreeJsState) super.getState();
     }
 
-    public void loadObj(Resource objRes) {
+    public void loadObj(String key, Resource objRes) {
         setResource(OBJ_URL_KEY, objRes);
-        getRpc().loadObj();
+        getRpc().loadObj(key);
     }
 
-    public void loadObj(Resource objRes, Resource texRes) {
-        setResource(OBJ_URL_KEY, objRes);
-        setResource(TEX_URL_KEY, texRes);
-        getRpc().loadObjWithTexture();
-    }
-    
-    public void loadObj(Resource objRes, Resource texRes, int ambient, int color, int specular, int shininess) {
-        setResource(OBJ_URL_KEY, objRes);
-        setResource(TEX_URL_KEY, texRes);
-        getRpc().loadObjWithTextureAndPhong(ambient, color, specular, shininess);
-    }
-    
-    public void loadObj(Resource objRes, int ambient, int color, int specular, int shininess) {
-        setResource(OBJ_URL_KEY, objRes);
-        getRpc().loadObjWithPhong(ambient, color, specular, shininess);
-    }
-
+//    public void loadObj(Resource objRes, Resource texRes) {
+//        setResource(OBJ_URL_KEY, objRes);
+//        setResource(TEX_URL_KEY, texRes);
+//        getRpc().loadObjWithTexture();
+//    }
+//    
+//    public void loadObj(Resource objRes, Resource texRes, int ambient, int color, int specular, int shininess) {
+//        setResource(OBJ_URL_KEY, objRes);
+//        setResource(TEX_URL_KEY, texRes);
+//        getRpc().loadObjWithTextureAndPhong(ambient, color, specular, shininess);
+//    }
+//    
+//    public void loadObj(Resource objRes, int ambient, int color, int specular, int shininess) {
+//        setResource(OBJ_URL_KEY, objRes);
+//        getRpc().loadObjWithPhong(ambient, color, specular, shininess);
+//    }
+//
     
     public void startAnimation() {
         getRpc().startAnimation();
@@ -65,14 +61,44 @@ public class ThreeJs extends com.vaadin.ui.AbstractComponent {
         return  getRpcProxy(ThreeJsClientRpc.class);
     }
 
-    public void addDirectionalLight(String id, int hexColor, double intensity) {
-        getRpc().addDirectionalLight(id, hexColor, intensity);
-        
-    }
+//    public void addDirectionalLight(String id, int hexColor, double intensity) {
+//        getRpc().addDirectionalLight(id, hexColor, intensity);
+//        
+//    }
 
     public void setDirectionalLightPosition(String id, double x, double y, double z) {
         getRpc().setDirectionalLightPosition(id, x, y, z);
     }
 
+    public void createPhongMaterial(String key, int ambient, int color, int specular, int shininess) {
+        getRpc().createPhongMaterial(key, ambient, color, specular, shininess);
+    }
+
+    public void setMaterialToObj(String materialId, String objId) {
+        getRpc().setMaterialToObj(materialId, objId);
+        
+    }
+
+    public void addObj(String id) {
+        getRpc().addObj(id);
+        
+    }
+
+    public void createDirectionalLight(String id, int hexColor, double intensity) {
+        getRpc().createDirectionalLight(id, hexColor, intensity);
+        
+    }
+
+    public void addLight(String id) {
+        getRpc().addLight(id);
+        
+    }
+
+    public void loadTextureToMaterial(ThemeResource themeResource,
+            String id) {
+        setResource(TEX_URL_KEY, themeResource);
+        getRpc().loadTexture(id);
+        
+    }
 
 }

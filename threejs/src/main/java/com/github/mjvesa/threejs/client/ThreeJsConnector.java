@@ -34,41 +34,41 @@ public class ThreeJsConnector extends AbstractComponentConnector {
             }
 
             @Override
-            public void loadObj() {
+            public void loadObj(String key) {
                     String url = getResourceUrl("objUrl");
-                    getWidget().loadObj(url);
+                    getWidget().loadObj(key, url);
                 
             }
 
-            @Override
-            public void loadObjWithTexture() {
-                String url = getResourceUrl("objUrl");
-                String texUrl = getResourceUrl("texUrl");
-                getWidget().loadObjWithTexture(url, texUrl);
-            }
+//            @Override
+//            public void loadObjWithTexture() {
+//                String url = getResourceUrl("objUrl");
+//                String texUrl = getResourceUrl("texUrl");
+//                getWidget().loadObjWithTexture(url, texUrl);
+//            }
+//
+//            @Override
+//            public void loadObjWithTextureAndPhong(int ambient, int color, int specular,
+//                    int shininess) {
+//                String url = getResourceUrl("objUrl");
+//                String texUrl = getResourceUrl("texUrl");
+//                getWidget().loadObjWithTextureAndPhong(url, texUrl, ambient, color, specular, shininess);
+//                
+//            }
+//            
+//            
+//            @Override
+//            public void loadObjWithPhong(int ambient, int color,
+//                    int specular, int shininess) {
+//                String url = getResourceUrl("objUrl");
+//                getWidget().loadObjWithTextureAndPhong(url, ambient, color, specular, shininess);
+//            }
+//
 
             @Override
-            public void loadObjWithTextureAndPhong(int ambient, int color, int specular,
-                    int shininess) {
-                String url = getResourceUrl("objUrl");
-                String texUrl = getResourceUrl("texUrl");
-                getWidget().loadObjWithTextureAndPhong(url, texUrl, ambient, color, specular, shininess);
-                
-            }
-            
-            
-            @Override
-            public void loadObjWithPhong(int ambient, int color,
-                    int specular, int shininess) {
-                String url = getResourceUrl("objUrl");
-                getWidget().loadObjWithTextureAndPhong(url, ambient, color, specular, shininess);
-            }
-
-
-            @Override
-            public void addDirectionalLight(String id, int hexColor,
+            public void createDirectionalLight(String key, int hexColor,
                     double intensity) {
-                getWidget().addDirectionalLight(id, hexColor, intensity);
+                getWidget().createDirectionalLight(key, hexColor, intensity);
                 
             }
 
@@ -78,6 +78,35 @@ public class ThreeJsConnector extends AbstractComponentConnector {
                 getWidget().setDirectionalLightPosition(id, x, y, z);
                 
             }
+
+            @Override
+            public void createPhongMaterial(String key, int ambient,
+                    int color, int specular, int shininess) {
+                getWidget().createPhongMaterial(key, ambient, color, specular, shininess);
+            }
+
+            @Override
+            public void setMaterialToObj(String materialId, String objId) {
+                getWidget().setMaterialToObj(materialId, objId);
+                
+            }
+
+            @Override
+            public void addObj(String id) {
+                getWidget().addObj(id);
+            }
+
+            @Override
+            public void addLight(String id) {
+                getWidget().addLight(id);
+            }
+
+            @Override
+            public void loadTexture(String id) {
+                String url = getResourceUrl("objUrl");
+                getWidget().loadTextureToMaterial(id, url);
+            }
+
 
         });
     }

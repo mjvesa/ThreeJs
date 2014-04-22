@@ -21,11 +21,4 @@ public class Obj extends Mesh {
 		});
     }-*/;
 
-    public final native void setMaterial(Material material) /*-{
-		this.traverse(function(child) {
-			if (child instanceof $wnd.THREE.Mesh) {
-				child.material = material;
-			}
-		});
-    }-*/;
 }

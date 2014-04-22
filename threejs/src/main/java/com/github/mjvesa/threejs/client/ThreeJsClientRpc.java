@@ -5,16 +5,16 @@ import com.vaadin.shared.communication.ClientRpc;
 
 public interface ThreeJsClientRpc extends ClientRpc {
 
-    public void loadObj();
+    public void loadObj(String key);
 
-    public void loadObjWithTexture();
+//    public void loadObjWithTexture();
+//
+//    public void loadObjWithTextureAndPhong(int ambient, int color, int specular, int shininess);
+//
+//    public void loadObjWithPhong(int ambient, int color, int specular,
+//            int shininess);
 
-    public void loadObjWithTextureAndPhong(int ambient, int color, int specular, int shininess);
-
-    public void loadObjWithPhong(int ambient, int color, int specular,
-            int shininess);
-
-    public void addDirectionalLight(String id, int hexColor, double intensity);
+    void createDirectionalLight(String key, int hexColor, double intensity);
 
     public void setDirectionalLightPosition(String id, double x, double y, double z);
 
@@ -22,5 +22,16 @@ public interface ThreeJsClientRpc extends ClientRpc {
     
     public void startAnimation();
 
+    public void createPhongMaterial(String key, int ambient, int color,
+            int specular, int shininess);
+
+    public void setMaterialToObj(String materialId, String objId);
+
+    public void addObj(String id);
+
+    public void addLight(String id);
+
+    public void loadTexture(String id);
+    
 }    
 
