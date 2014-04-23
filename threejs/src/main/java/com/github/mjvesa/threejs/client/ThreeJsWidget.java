@@ -26,6 +26,7 @@ import com.google.gwt.animation.client.AnimationScheduler.AnimationHandle;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.client.VConsole;
 
 public class ThreeJsWidget extends Widget {
 
@@ -139,13 +140,14 @@ public class ThreeJsWidget extends Widget {
         materials.put(id, MeshBasicMaterial.getInstance());
     }
 
-    public void loadTextureToMaterial(final String id, String url) {
+    public void loadTextureToMaterial(String url, final String id) {
 
         ImageUtils.loadTexture(url, new ImageUtils.OnTextureLoad() {
             @Override
             public void onLoad(Texture texture) {
                 Material material = materials.get(id);
                 material.setTexture(texture);
+                VConsole.log("LE TEXTURE IS LOAD!");
             }
         });
     }

@@ -9,7 +9,10 @@ public class Material extends JavaScriptObject {
     }
 
     public final native void setTexture(Texture texture) /*-{
-		this.map = texture;
+                this.map = texture;
+                this.map.needsUpdate = true;
+                this.needsUpdate = true;
     }-*/;
+
 
 }

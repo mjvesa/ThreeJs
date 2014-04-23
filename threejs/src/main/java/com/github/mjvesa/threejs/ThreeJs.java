@@ -34,24 +34,6 @@ public class ThreeJs extends com.vaadin.ui.AbstractComponent {
         setResource(OBJ_URL_KEY, objRes);
         getRpc().loadObj(key);
     }
-
-//    public void loadObj(Resource objRes, Resource texRes) {
-//        setResource(OBJ_URL_KEY, objRes);
-//        setResource(TEX_URL_KEY, texRes);
-//        getRpc().loadObjWithTexture();
-//    }
-//    
-//    public void loadObj(Resource objRes, Resource texRes, int ambient, int color, int specular, int shininess) {
-//        setResource(OBJ_URL_KEY, objRes);
-//        setResource(TEX_URL_KEY, texRes);
-//        getRpc().loadObjWithTextureAndPhong(ambient, color, specular, shininess);
-//    }
-//    
-//    public void loadObj(Resource objRes, int ambient, int color, int specular, int shininess) {
-//        setResource(OBJ_URL_KEY, objRes);
-//        getRpc().loadObjWithPhong(ambient, color, specular, shininess);
-//    }
-//
     
     public void startAnimation() {
         getRpc().startAnimation();
@@ -60,11 +42,6 @@ public class ThreeJs extends com.vaadin.ui.AbstractComponent {
     private ThreeJsClientRpc getRpc() {
         return  getRpcProxy(ThreeJsClientRpc.class);
     }
-
-//    public void addDirectionalLight(String id, int hexColor, double intensity) {
-//        getRpc().addDirectionalLight(id, hexColor, intensity);
-//        
-//    }
 
     public void setDirectionalLightPosition(String id, double x, double y, double z) {
         getRpc().setDirectionalLightPosition(id, x, y, z);

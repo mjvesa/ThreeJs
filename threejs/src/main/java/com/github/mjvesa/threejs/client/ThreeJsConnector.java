@@ -40,31 +40,6 @@ public class ThreeJsConnector extends AbstractComponentConnector {
                 
             }
 
-//            @Override
-//            public void loadObjWithTexture() {
-//                String url = getResourceUrl("objUrl");
-//                String texUrl = getResourceUrl("texUrl");
-//                getWidget().loadObjWithTexture(url, texUrl);
-//            }
-//
-//            @Override
-//            public void loadObjWithTextureAndPhong(int ambient, int color, int specular,
-//                    int shininess) {
-//                String url = getResourceUrl("objUrl");
-//                String texUrl = getResourceUrl("texUrl");
-//                getWidget().loadObjWithTextureAndPhong(url, texUrl, ambient, color, specular, shininess);
-//                
-//            }
-//            
-//            
-//            @Override
-//            public void loadObjWithPhong(int ambient, int color,
-//                    int specular, int shininess) {
-//                String url = getResourceUrl("objUrl");
-//                getWidget().loadObjWithTextureAndPhong(url, ambient, color, specular, shininess);
-//            }
-//
-
             @Override
             public void createDirectionalLight(String key, int hexColor,
                     double intensity) {
@@ -102,8 +77,8 @@ public class ThreeJsConnector extends AbstractComponentConnector {
 
             @Override
             public void loadTexture(String id) {
-                String url = getResourceUrl("objUrl");
-                getWidget().loadTextureToMaterial(id, url);
+                String url = getResourceUrl("texUrl");
+                getWidget().loadTextureToMaterial(url, id);
             }
 
 

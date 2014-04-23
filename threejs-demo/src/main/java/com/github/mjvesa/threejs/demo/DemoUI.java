@@ -25,6 +25,10 @@ import com.vaadin.ui.VerticalSplitPanel;
 public class DemoUI extends UI {
 
     private CssLayout objView;
+    
+    private static final String MATERIAL = "material";
+    private static final String LIGHT = "light";
+    private static final String OBJ = "obj";
 
     public enum OBJECT {
         VAADIN, CASTLE, MOLECULE;
@@ -75,17 +79,17 @@ public class DemoUI extends UI {
                 switch (obj) {
                 case VAADIN:
                     
-                    three.loadObj("obj", new ThemeResource("vaadin.obj"));                    
+                    three.loadObj(OBJ, new ThemeResource("vaadin.obj"));                    
 
-                    three.createDirectionalLight("light", 0xffffff, 0.5);
-                    three.setDirectionalLightPosition("light", 0, 0, 2);
-                    three.addLight("light");
+                    three.createDirectionalLight(LIGHT, 0xffffff, 0.5);
+                    three.setDirectionalLightPosition(LIGHT, 0, 0, 2);
+                    three.addLight(LIGHT);
                                                         
-                    three.createPhongMaterial("material",0x303030,
+                    three.createPhongMaterial(MATERIAL, 0x303030,
                             0xdddddd, 0xffffff, 30);
-                    three.loadTextureToMaterial(new ThemeResource("steel.jpg"), "material");
-                    three.setMaterialToObj("material", "obj");
-                    three.addObj("obj");
+                    three.loadTextureToMaterial(new ThemeResource("steel.jpg"), MATERIAL);
+                    three.setMaterialToObj(MATERIAL, OBJ);
+                    three.addObj(OBJ);
 
 
                     break;
@@ -115,7 +119,6 @@ public class DemoUI extends UI {
                     three.addLight("light");
 
                     break;
-
                 }
                 objView.removeAllComponents();
                 objView.addComponent(three);
