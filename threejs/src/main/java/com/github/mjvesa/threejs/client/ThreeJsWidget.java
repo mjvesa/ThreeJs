@@ -6,6 +6,9 @@ import java.util.List;
 
 import com.github.mjvesa.threejs.client.camera.Camera;
 import com.github.mjvesa.threejs.client.camera.PerspectiveCamera;
+import com.github.mjvesa.threejs.client.controls.Controls;
+import com.github.mjvesa.threejs.client.controls.FirstPersonControls;
+import com.github.mjvesa.threejs.client.controls.PointerLockControls;
 import com.github.mjvesa.threejs.client.controls.TrackballControls;
 import com.github.mjvesa.threejs.client.light.DirectionalLight;
 import com.github.mjvesa.threejs.client.light.Light;
@@ -15,6 +18,7 @@ import com.github.mjvesa.threejs.client.material.MeshPhongMaterial;
 import com.github.mjvesa.threejs.client.object.Mesh;
 import com.github.mjvesa.threejs.client.object.Obj;
 import com.github.mjvesa.threejs.client.object.Obj.OnObjLoad;
+import com.github.mjvesa.threejs.client.object.Pdb;
 import com.github.mjvesa.threejs.client.renderer.Renderer;
 import com.github.mjvesa.threejs.client.renderer.WebGLRenderer;
 import com.github.mjvesa.threejs.client.scene.Scene;
@@ -40,7 +44,7 @@ public class ThreeJsWidget extends Widget {
     private Camera camera;
     private Renderer renderer;
     private Scene scene;
-    private TrackballControls controls;
+    private Controls controls;
     private Element root;
 
     public ThreeJsWidget() {
@@ -87,19 +91,37 @@ public class ThreeJsWidget extends Widget {
                 }
             }
 
-            private void addPendingMaterialsToMesh(String id) {
-
-                List<Material> materials = objMaterials.get(id);
-                if (materials != null) {
-                    Mesh mesh = objects.get(id);
-                    for (Material material : materials) {
-                        mesh.setMaterial(material);
-                    }
-                }
-            }
         });
     }
 
+    public void loadPdb(final String id, String url) {
+        Pdb.loadPdb(url, new Pdb.OnPdbLoad() {
+            @Override
+            public void onLoad(Pdb obj) {
+                Mesh mesh = objects.get(id);
+                objects.put(id, obj);
+                addPendingMaterialsToMesh(id);
+                if (mesh == OBJ_ADD_REQUESTED) {
+                    addObj(id);
+                }
+            }
+
+        });
+        
+    }
+
+    private void addPendingMaterialsToMesh(String id) {
+
+        List<Material> materials = objMaterials.get(id);
+        if (materials != null) {
+            Mesh mesh = objects.get(id);
+            for (Material material : materials) {
+                mesh.setMaterial(material);
+            }
+        }
+    }
+
+    
     public void loadObjWithMtl(final String id, String url) {
         // TODO add the mtl, or sumthin.
         Obj.loadObj(url, new OnObjLoad() {
@@ -191,5 +213,6 @@ public class ThreeJsWidget extends Widget {
 
         lst.add(materials.get(materialId));
     }
+
 
 }

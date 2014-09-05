@@ -9,6 +9,7 @@ public class Obj extends Mesh {
     public static interface OnObjLoad {
         public void onLoad(Obj obj);
     }
+    
     protected Obj() {
     }
 

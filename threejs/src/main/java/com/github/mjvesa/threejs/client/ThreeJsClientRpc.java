@@ -7,19 +7,14 @@ public interface ThreeJsClientRpc extends ClientRpc {
 
     public void loadObj(String key);
 
-//    public void loadObjWithTexture();
-//
-//    public void loadObjWithTextureAndPhong(int ambient, int color, int specular, int shininess);
-//
-//    public void loadObjWithPhong(int ambient, int color, int specular,
-//            int shininess);
+    // TODO obj + mtl
+
+    public void loadPdb(String key);
 
     void createDirectionalLight(String key, int hexColor, double intensity);
 
     public void setDirectionalLightPosition(String id, double x, double y, double z);
 
-    // TODO obj + mtl
-    
     public void startAnimation();
 
     public void createPhongMaterial(String key, int ambient, int color,
@@ -32,6 +27,7 @@ public interface ThreeJsClientRpc extends ClientRpc {
     public void addLight(String id);
 
     public void loadTexture(String id);
+
     
 }    
 

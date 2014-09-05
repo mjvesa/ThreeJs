@@ -39,6 +39,13 @@ public class ThreeJsConnector extends AbstractComponentConnector {
                     getWidget().loadObj(key, url);
                 
             }
+            
+            @Override
+            public void loadPdb(String key) {
+                String url = getResourceUrl("objUrl");
+                getWidget().loadPdb(key, url);
+            }
+
 
             @Override
             public void createDirectionalLight(String key, int hexColor,
@@ -80,7 +87,6 @@ public class ThreeJsConnector extends AbstractComponentConnector {
                 String url = getResourceUrl("texUrl");
                 getWidget().loadTextureToMaterial(url, id);
             }
-
 
         });
     }

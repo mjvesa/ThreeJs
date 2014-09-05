@@ -31,7 +31,7 @@ public class DemoUI extends UI {
     private static final String OBJ = "obj";
 
     public enum OBJECT {
-        VAADIN, CASTLE, MOLECULE;
+        VAADIN, CASTLE, MOLECULE, CAFFEINE;
     }
 
     @WebServlet(value = "/*", asyncSupported = true)
@@ -60,9 +60,13 @@ public class DemoUI extends UI {
 
     private Component createObjectSelect() {
         ComboBox cb = new ComboBox();
+        cb.setInputPrompt("Select object");
         cb.addItem(OBJECT.VAADIN);
         cb.addItem(OBJECT.MOLECULE);
-        cb.addItem(OBJECT.CASTLE);
+
+        // TODO fix these demos
+        //        cb.addItem(OBJECT.CASTLE);
+        //        cb.addItem(OBJECT.CAFFEINE);
         cb.setNullSelectionAllowed(false);        
         cb.setImmediate(true);
 
@@ -119,6 +123,20 @@ public class DemoUI extends UI {
                     three.addLight("light");
 
                     break;
+                case CAFFEINE:
+                    three.loadPdb("obj", new ThemeResource("caffeine.pdb"));
+
+                    three.createPhongMaterial("material",0x303030,
+                            0xdddddd, 0xffffff, 30);
+                    three.setMaterialToObj("material", "obj");
+                    three.addObj("obj");
+                    
+                    three.createDirectionalLight("light", 0xffffff, 0.5);
+                    three.setDirectionalLightPosition("light", 0, 0, 2);
+                    three.addLight("light");
+
+                    break;
+
                 }
                 objView.removeAllComponents();
                 objView.addComponent(three);

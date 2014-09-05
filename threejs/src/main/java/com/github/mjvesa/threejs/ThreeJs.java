@@ -8,7 +8,7 @@ import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.shared.MouseEventDetails;
 
-@JavaScript({ "three.min.js", "OBJLoader.js", "TrackballControls.js" })
+@JavaScript({ "three.min.js", "OBJLoader.js", "PDBLoader.js", "TrackballControls.js", "FirstPersonControls.js", "PointerLockControls.js" })
 public class ThreeJs extends com.vaadin.ui.AbstractComponent {
 
     private static final String TEX_URL_KEY = "texUrl";
@@ -34,6 +34,12 @@ public class ThreeJs extends com.vaadin.ui.AbstractComponent {
         setResource(OBJ_URL_KEY, objRes);
         getRpc().loadObj(key);
     }
+    
+    public void loadPdb(String key, Resource objRes) {
+        setResource(OBJ_URL_KEY, objRes);
+        getRpc().loadPdb(key);
+    }
+
     
     public void startAnimation() {
         getRpc().startAnimation();
@@ -77,5 +83,6 @@ public class ThreeJs extends com.vaadin.ui.AbstractComponent {
         getRpc().loadTexture(id);
         
     }
+
 
 }
